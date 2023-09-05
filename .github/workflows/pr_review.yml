@@ -1,0 +1,24 @@
+name: Greeting on variable day
+
+on: push
+
+env:
+  DAY_OF_WEEK: Monday
+  runner_type: ubuntu-latest
+  is_self_runner: false
+
+jobs:
+  greeting_job:
+    runs-on: ubuntu-latest
+    env:
+      Greeting: Hello
+    steps:
+      - name: "Say Hello Mona it's Monday"
+        run: echo "${{ job.runs-on }} $First_Name. Today is $DAY_OF_WEEK!"
+        env:
+          First_Name: Mona
+      - name: "test step"
+        if: env.runner_type == 'ubuntu-latest-1'
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        env:
+          First_Name: Mona
